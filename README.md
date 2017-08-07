@@ -1,3 +1,12 @@
+### Marple
+A tool for analysing CSS
+
+**WIP**
+
+Marple is a work in progress. Current metrics / reports:
+
+- Duplicate CSS declarations
+
 **To install**
 
 ```

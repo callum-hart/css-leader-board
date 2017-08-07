@@ -25,10 +25,10 @@ if (_.isEmpty(userArgs)) {
       console.log(`Number of duplicate declarations: ${metrics.duplicationCount}`);
       console.log(`Percentage of duplicate declarations: ${metrics.duplicationPercent}%\n`);
 
-      console.log('\n--------------- Duplicate declarations (overview) ---------------\n');
+      console.log('\n--------------- Top 10 duplicated declarations ---------------\n');
       console.log(_.take(duplicates, 10).map(res => _.omit(res, ['occurances', 'property', 'value'])));
 
-      console.log('\n\n--------------- Duplicate declarations (detailed) ---------------\n');
+      console.log('\n\n--------------- Top 10 duplicated declarations (verbose) ---------------\n');
       console.log(_.take(duplicates, 10));
     }, err => {
       console.log(`Sorry, couldn't find CSS located at: ${cssResource}`);

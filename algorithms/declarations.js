@@ -20,7 +20,7 @@ const tallyDeclarations = (cssRules) => {
 }
 
 const inspectRule = (tally, block, media = false) => {
-  const selector = media ? `${_.join(block.selectors, ', ')} {{${media}}}` : _.join(block.selectors, ', ');
+  const selector = media ? `${_.join(block.selectors, ', ')} <<@media: ${media}>>` : _.join(block.selectors, ', ');
 
   for (var declaration of block.declarations) {
     const { property, value } = declaration;
@@ -44,9 +44,8 @@ const inspectRule = (tally, block, media = false) => {
 }
 
 const seeMetrics = (cssRules) => {
-  const declarations = tallyDeclarations(cssRules);
   const duplicates = seeDuplicates(cssRules);
-  const declarationCount = _.sumBy(declarations, 'count');
+  const declarationCount = _.sumBy(tallyDeclarations(cssRules), 'count');
   let duplicationCount = 0;
 
   _.forEach(duplicates, (declaration) => duplicationCount += (declaration.count - 1));
@@ -60,8 +59,7 @@ const seeMetrics = (cssRules) => {
 }
 
 const seeDuplicates = (cssRules) => {
-  const declarations = tallyDeclarations(cssRules);
-  return declarations.filter(declaration => declaration.count > 1);
+  return tallyDeclarations(cssRules).filter(declaration => declaration.count > 1);
 }
 
 module.exports = { seeMetrics, seeDuplicates };
